@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DTF</title>
 </head>
 <body>
     <h1>{{ title }}</h1>
-    <ul>
-    {% for i in dft_news %}
-        <li>{{ i }}</li>
+    {% for row in dft_news %}
+        <div class="card-deck">
+        {% for i in row %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ i.image }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.title }}</h5>
+                    <h6 class="card-title">{{ i.author }}</h6>
+                    <p class="card-text">{{ i.description }}</p>
+                    <a href="{{ i.link }}" class="btn btn-primary">К статье</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <br>
     {% endfor %}
-    </ul>
 </body>
 </html>
