@@ -82,9 +82,15 @@ class DTFParser(RssParser, ABC):
         self.__images = []
         for item in self.__items:
             images = item.find_all('enclosure')
+            flag = True
             if len(images):
-                self.__images.append(images[0].get('url'))
-            else:
+                i = 0
+                while i < len(images) and flag:
+                    if images[i].get('type') == "image/jpeg":
+                        self.__images.append(images[i].get('url'))
+                        flag = False
+                    i += 1
+            if flag:
                 self.__images.append('')
 
     def get_images(self):
@@ -102,7 +108,7 @@ class DTFParser(RssParser, ABC):
     def __set_titles(self):
         self.__titles = []
         for item in self.__items:
-            self.__titles.append(item.find('title').text)
+            self.__titles.append(item.find('title').text.replace('&amp;', '&'))
 
     def get_titles(self):
         return self.__titles
