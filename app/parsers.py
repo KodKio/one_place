@@ -18,7 +18,7 @@ class RssParser(ABC):
 
     def __set_soup(self):
         text = requests.get(self.__url).text
-        return BeautifulSoup(text)
+        return BeautifulSoup(text, 'html.parser')
 
     @abstractmethod
     def get_all(self):
@@ -58,11 +58,14 @@ class DTFParser(RssParser, ABC):
         self.__set_images()
         self.__set_links()
         self.__set_titles()
+        self.__set_all()
 
     def __set_links(self):
         self.__links = []
         for item in self.__items:
-            self.__links.append(item.find('link').string.strip())
+            link = item.text[item.text.find('https://dtf'):]
+            link = link[:link.find('\n')]
+            self.__links.append(link)
 
     def get_links(self):
         return self.__links
@@ -70,7 +73,7 @@ class DTFParser(RssParser, ABC):
     def __set_authors(self):
         self.__authors = []
         for item in self.__items:
-            self.__authors.append(item.find('author').string.strip())
+            self.__authors.append(item.find('author').text)
 
     def get_authors(self):
         return self.__authors
@@ -78,7 +81,11 @@ class DTFParser(RssParser, ABC):
     def __set_images(self):
         self.__images = []
         for item in self.__items:
-            self.__images.append(item.find('enclosure').get_attr('url').strip())
+            images = item.find_all('enclosure')
+            if len(images):
+                self.__images.append(images[0].get('url'))
+            else:
+                self.__images.append('')
 
     def get_images(self):
         return self.__images
@@ -86,7 +93,8 @@ class DTFParser(RssParser, ABC):
     def __set_descriptions(self):
         self.__descriptions = []
         for item in self.__items:
-            self.__descriptions.append(item.find('description').string.strip())
+            description = item.find('description').text
+            self.__descriptions.append(description[:description.find('\n')])
 
     def get_descriptions(self):
         return self.__descriptions
@@ -94,7 +102,7 @@ class DTFParser(RssParser, ABC):
     def __set_titles(self):
         self.__titles = []
         for item in self.__items:
-            self.__titles.append(item.find('title').string.strip())
+            self.__titles.append(item.find('title').text)
 
     def get_titles(self):
         return self.__titles
@@ -105,7 +113,7 @@ class DTFParser(RssParser, ABC):
             item = dict()
             item['title'] = self.get_titles()[i]
             item['description'] = self.get_descriptions()[i]
-            item['image'] = self.get_authors()[i]
+            item['image'] = self.get_images()[i]
             item['author'] = self.get_authors()[i]
             item['link'] = self.get_links()[i]
             self.__all.append(item)
