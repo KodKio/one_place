@@ -1,0 +1,16 @@
+{% for row in dft_news %}
+    <div class="card-deck">
+    {% for i in row %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ i.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.title }}</h5>
+                <h6 class="card-title">{{ i.author }}</h6>
+                <p class="card-text">{{ i.description }}</p>
+                <a href="{{ i.link }}" class="btn btn-primary stretch ed-link">К статье</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br>
+{% endfor %}
