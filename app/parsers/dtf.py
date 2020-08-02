@@ -1,5 +1,6 @@
 from . import rssreader
 
+
 class DTFParser(rssreader.RssParser, rssreader.ABC):
 
     def __init__(self, url="https://dtf.ru/rss/all"):

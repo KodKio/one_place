@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import app.parsers as parse
+from .parsers import modules as parse
 
 
 # Create your views here.
