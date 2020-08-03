@@ -1,35 +1,33 @@
-<div class="bg-dark">
-    <h1 class="text-light">DTF</h1>
-    <div id="carouselExampleControls" class="carousel slide bg-dark" data-ride="carousel">
-        <div class="carousel-inner">
-        {% for r in dft_news %}
-            <div class="carousel-item {% if r.index == 0 %} active {% endif %}">
-                <div class="row">
-                {% for i in r.data %}
-                    <div class="col-4 ">
-                        <div class="card bg-dark border border-white" style="width: 24rem;">
-                            <img src="{{ i.image }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-light">{{ i.title }}</h5>
-                                <h6 class="card-title text-light">{{ i.author }}</h6>
-                                <p class="card-text text-light">{{ i.description }}</p>
-                                <a href="{{ i.link }}" class="stretched-link"></a>
-                            </div>
+<h1 class="text-light">DTF</h1>
+<div id="carouselExampleControls" class="carousel slide bg-dark" data-ride="carousel">
+    <div class="carousel-inner">
+    {% for r in dft_news %}
+        <div class="carousel-item {% if r.index == 0 %} active {% endif %}">
+            <div class="row">
+            {% for i in r.data %}
+                <div class="col-4 ">
+                    <div class="card bg-dark border border-white" style="width: 24rem;">
+                        <img src="{{ i.image }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-light">{{ i.title }}</h5>
+                            <h6 class="card-title text-light">{{ i.author }}</h6>
+                            <p class="card-text text-light">{{ i.description }}</p>
+                            <a href="{{ i.link }}" class="stretched-link"></a>
                         </div>
                     </div>
-                {% endfor %}
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
         </div>
-
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+    {% endfor %}
     </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
