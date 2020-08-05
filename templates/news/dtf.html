@@ -5,8 +5,8 @@
         <div class="carousel-item {% if r.index == 0 %} active {% endif %}">
             <div class="row">
             {% for i in r.data %}
-                <div class="col-4 ">
-                    <div class="card bg-dark border border-white" style="width: 24rem;">
+                <div class="col-4">
+                    <div class="card bg-dark border border-white" style="width: 23rem;">
                         <img src="{{ i.image }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-light">{{ i.title }}</h5>
