@@ -1,1 +1,2 @@
-from .dtf import *
+from .news.dtf import *
+from .news.vcru import *

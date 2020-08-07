@@ -1,9 +1,9 @@
-from . import rssreader
+from app.parsers import rssreader
 
 
-class DTFParser(rssreader.RssParser, rssreader.ABC):
+class VCRUParser(rssreader.RssParser, rssreader.ABC):
 
-    def __init__(self, url="https://dtf.ru/rss/all"):
+    def __init__(self, url="https://vc.ru/rss/all"):
         super().__init__(url)
         self.__items = self._soup.find_all('item')
         self.__set_all_properties()
@@ -19,7 +19,7 @@ class DTFParser(rssreader.RssParser, rssreader.ABC):
     def __set_links(self):
         self.__links = []
         for item in self.__items:
-            link = item.text[item.text.find('https://dtf'):]
+            link = item.text[item.text.find('https://vc'):]
             link = link[:link.find('\n')]
             self.__links.append(link)
 
